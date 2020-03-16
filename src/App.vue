@@ -3,12 +3,23 @@
     <v-app-bar app flat hide-on-scroll>
       <v-spacer></v-spacer>
       <v-btn
+        v-if="user"
+        class="mr-2"
+        text
+        to="/Dashboard"
+      >
+        <v-icon>mdi-view-dashboard</v-icon>
+      </v-btn>
+
+      <v-btn
+        v-else
         class="mr-2"
         text
         to="/Login"
       >
         <v-icon>mdi-account</v-icon>
       </v-btn>
+
       <v-btn
         class="mr-2"
         text
@@ -29,3 +40,25 @@
     
   </v-app>
 </template>
+
+<script>
+import firebase from 'firebase'
+
+export default {
+  data() {
+    return {
+      user: null
+    }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (!user) {
+        this.$router.push('/login');
+      } else {
+        this.user = user;
+        this.$router.push('/dashboard');
+      }
+    });
+  }
+}
+</script>
