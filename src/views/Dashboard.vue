@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <v-card class="elevation-4">
           <v-form ref="artworkForm">
             <v-container>
