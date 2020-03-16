@@ -1,13 +1,12 @@
 <template>
   <div>
-    <h1 class="display-1 my-3">Add a new artwork</h1>
-
     <v-row>
       <v-col cols="8">
-        <v-card>
+        <v-card class="elevation-4">
           <v-form ref="artworkForm">
             <v-container>
               <v-row class="mx-5">
+                <v-card-title class="display-1">Add a new artwork</v-card-title>
                 <v-col cols="12">
                   <v-text-field label="Title" v-model="title" prepend-icon="mdi-text-short"
                   required :rules="requiredRule"

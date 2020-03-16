@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="text-center">
 
-      <v-col class="my-8">
+      <v-col>
         <h1 class="display-2 mb-3 font-weight-light">
           Welcome to Ninoska's Artkive
         </h1>

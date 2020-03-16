@@ -32,7 +32,7 @@
     <v-content>
       <v-container>
         <v-fade-transition>
-          <router-view class="mx-auto"/>
+          <router-view class="mx-auto my-8"/>
         </v-fade-transition>
       </v-container>
     </v-content>
