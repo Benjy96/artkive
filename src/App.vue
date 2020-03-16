@@ -63,10 +63,9 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.user = null;
-        this.$router.push('/login');
       } else {
         this.user = user;
-        this.$router.push('/');
+        this.$router.push('/login');
       }
     });
   },
