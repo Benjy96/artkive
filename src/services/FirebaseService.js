@@ -4,7 +4,11 @@ import { db } from '../firebaseInit';
 class FirebaseService {
 
     static getUserId() {
-        return firebase.auth().currentUser.uid;
+        if(firebase.auth().currentUser) {
+            return firebase.auth().currentUser.uid;
+        } else {
+            return null;
+        }
     }
     
     static isCurrentUser(id) {
@@ -25,7 +29,10 @@ class FirebaseService {
         let artworks = [];
         let querySnapshot = await db.collection('artists').doc(uid).collection('artworks').get();
         querySnapshot.forEach(doc => {
-            artworks.push(doc.data());
+            artworks.push({
+                ...doc.data(),
+                id: doc.id
+            });
         });
 
         return artworks;
@@ -58,6 +65,15 @@ class FirebaseService {
                 );
             });
         }
+    }
+
+    static async updateArtwork(artworkID, title, description) {
+        let uid = this.getUserId();
+
+        db.collection(`artists/${uid}/artworks`).doc(artworkID).update({
+            title: title,
+            description: description
+        });
     }
 }
 

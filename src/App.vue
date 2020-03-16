@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app flat hide-on-scroll color="purple lighten-4">
       <v-btn
-        v-if="user"
+        v-if="user != null"
         text
         @click="logout"
       >
@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-if="user"
+        v-if="user != null"
         class="mr-2"
         text
         to="/Dashboard"
