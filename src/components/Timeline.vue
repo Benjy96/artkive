@@ -15,7 +15,7 @@
             <span slot="opposite">{{item.date}}</span>
             <v-card class="elevation-2">
               <v-card-title class="headline">{{item.title}}</v-card-title>
-              <v-img :src="getAssetImg(item.src)"></v-img>
+              <v-img :src="item.image"></v-img>
               <v-card-text>
                 {{item.text}}
               </v-card-text>
@@ -30,16 +30,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'Timeline',
-    props: ["artist"],
-    data: () => ({
-      timelineItems: []
-    }),
-    methods: {
-      getAssetImg(src) {
-        return require("@/assets/" + src);
-      }
+import FirebaseService from '@/services/FirebaseService'
+
+export default {
+  name: 'Timeline',
+  props: ["artist"],
+  created() {
+    FirebaseService.getArtworks(this.artist).then((res) => {
+      this.timelineItems = res;
+    });
+  },
+  data: () => ({
+    timelineItems: []
+  }),
+  methods: {
+    getAssetImg(src) {
+      return require("@/assets/" + src);
     }
   }
+}
 </script>

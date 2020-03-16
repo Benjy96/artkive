@@ -22,33 +22,41 @@ class FirebaseService {
     }
 
     static async getArtworks(uid) {
-        let data = await (db.collection('artists').doc(uid).collection('artworks').get()).data();
-        return data;
+        let artworks = [];
+        let querySnapshot = await db.collection('artists').doc(uid).collection('artworks').get();
+        querySnapshot.forEach(doc => {
+            artworks.push(doc.data());
+        });
+
+        return artworks;
     }
 
     static async saveArtwork(title, description, date, image) {
         let uid = this.getUserId();
 
         if(image != null) {
+            let d = new Date();
             // Create a reference
             let storageRef = firebase.storage().ref();
-            let ref = storageRef.child(`${uid}/${image.name}`);
+            let ref = storageRef.child(`${uid}/${d.toISOString()}-${image.name}`);
 
             // Upload the file
-            ref.put(image);
+            ref.put(image).then(async () => {
+                let imagePath = ref.root + ref.fullPath;
 
-            let imagePath = ref.root + ref.fullPath;
+                let downloadURL = await this.getImageDownloadURL(imagePath);
 
-            db.collection(`/artists/${uid}/artworks`).doc()
-            .set(
-                {
-                    title: title,
-                    description: description, 
-                    date: date,
-                    image: imagePath
-                },
-                { merge: true }
-            );
+                db.collection(`/artists/${uid}/artworks`).doc()
+                .set(
+                    {
+                        title: title,
+                        description: description, 
+                        date: date,
+                        image: downloadURL
+                    },
+                    { merge: true }
+                );
+            });
         }
     }
 }
