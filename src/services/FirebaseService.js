@@ -41,7 +41,7 @@ class FirebaseService {
             let ref = storageRef.child(`${uid}/${d.toISOString()}-${image.name}`);
 
             // Upload the file
-            ref.put(image).then(async () => {
+            await ref.put(image).then(async () => {
                 let imagePath = ref.root + ref.fullPath;
 
                 let downloadURL = await this.getImageDownloadURL(imagePath);

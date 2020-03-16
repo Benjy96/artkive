@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="display-1 my-3">Add new artwork</h1>
+    <h1 class="display-1 my-3">Add a new artwork</h1>
 
     <v-row>
       <v-col cols="8">
@@ -70,7 +70,9 @@ export default {
   methods: {
     add() {
       if(this.$refs.artworkForm.validate()) {
-        FirebaseService.saveArtwork(this.title, this.description, this.date, this.image);
+        FirebaseService.saveArtwork(this.title, this.description, this.date, this.image).then(() => {
+          this.$router.push({name: 'Home'})
+        });
       }
     }
   },
