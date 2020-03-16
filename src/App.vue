@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app flat hide-on-scroll color="purple lighten-4">
       <v-btn
-        v-if="user != null"
+        v-if="$root.user != null"
         text
         @click="logout"
       >
@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-if="user != null"
+        v-if="$root.user != null"
         class="mr-2"
         text
         to="/Dashboard"
@@ -54,19 +54,15 @@
 import firebase from 'firebase'
 
 export default {
-  data() {
-    return {
-      user: null
-    }
-  },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
-        this.user = null;
+        this.$root.user = null;
       } else {
-        this.user = user;
-        this.$router.push('/login');
+        this.$root.user = user;
+        this.$router.push('/');
       }
+      
     });
   },
   methods: {

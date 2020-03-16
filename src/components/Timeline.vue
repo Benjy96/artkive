@@ -17,17 +17,17 @@
 
               <!-- Title & Edit Button -->
               <v-card-title class="display-1 font-weight-light" v-if="!editMode">
-                <v-btn v-if="user" @click="editMode = true" icon class="mr-2">
+                <v-btn v-if="$root.user" @click="editMode = true" icon class="mr-2">
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
                 {{item.title}}
               </v-card-title>
 
               <v-card-title class="display-1 font-weight-light" v-else>
-                <v-btn v-if="user && editMode" @click="editMode = false" icon class="mr-2" color="error">
+                <v-btn v-if="$root.user && editMode" @click="editMode = false" icon class="mr-2" color="error">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
-                <v-btn v-if="user && editMode" @click="updateArtwork(index)" icon class="mr-2" color="success">
+                <v-btn v-if="$root.user && editMode" @click="updateArtwork(index)" icon class="mr-2" color="success">
                   <v-icon>mdi-check</v-icon>
                 </v-btn>
                 <v-text-field class="display-1 font-weight-light" v-model="item.title"></v-text-field>
@@ -61,13 +61,11 @@ export default {
   name: 'Timeline',
   props: ["artist"],
   created() {
-    this.user = FirebaseService.getUserId();
     FirebaseService.getArtworks(this.artist).then((res) => {
       this.timelineItems = res;
     });
   },
   data: () => ({
-    user: null,
     editMode: false,
     timelineItems: []
   }),
