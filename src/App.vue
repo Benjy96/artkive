@@ -1,7 +1,16 @@
 <template>
   <v-app>
     <v-app-bar app flat hide-on-scroll color="purple lighten-4">
+      <v-btn
+        v-if="user"
+        text
+        @click="logout"
+      >
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+
       <v-spacer></v-spacer>
+
       <v-btn
         v-if="user"
         class="mr-2"
@@ -53,12 +62,18 @@ export default {
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
+        this.user = null;
         this.$router.push('/login');
       } else {
         this.user = user;
         this.$router.push('/');
       }
     });
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut();
+    }
   }
 }
 </script>
