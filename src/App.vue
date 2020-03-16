@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app flat hide-on-scroll>
+    <v-app-bar app flat hide-on-scroll color="purple lighten-4">
       <v-spacer></v-spacer>
       <v-btn
         v-if="user"
@@ -56,7 +56,7 @@ export default {
         this.$router.push('/login');
       } else {
         this.user = user;
-        this.$router.push('/dashboard');
+        this.$router.push('/');
       }
     });
   }

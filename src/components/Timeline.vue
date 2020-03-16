@@ -3,8 +3,8 @@
     <v-row class="text-center">
 
       <v-col class="my-8">
-        <h1 class="display-2 mb-3">
-          Welcome to Artkive
+        <h1 class="display-2 mb-3 font-weight-light">
+          Welcome to Ninoska's Artkive
         </h1>
       </v-col>
 
@@ -13,11 +13,11 @@
         <v-timeline>
           <v-timeline-item v-for="(item, index) in timelineItems" :key="index">
             <span slot="opposite">{{item.date}}</span>
-            <v-card class="elevation-2">
+            <v-card class="elevation-4">
               <v-card-title class="headline">{{item.title}}</v-card-title>
               <v-img :src="item.image"></v-img>
-              <v-card-text>
-                {{item.text}}
+              <v-card-text v-if="item.description.length > 0" class="text-align">
+                {{item.description}}
               </v-card-text>
             </v-card>
           </v-timeline-item>
