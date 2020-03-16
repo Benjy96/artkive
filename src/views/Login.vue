@@ -31,7 +31,7 @@
 </template>
 
 <script>
-// import firebase from 'firebase';
+import firebase from 'firebase';
 
 export default {
     name: 'Login',
@@ -50,10 +50,9 @@ export default {
         login() {  //event is a MouseEvent - passed in by Javascript
             if(!this.$refs.form.validate()) return;
             
-            // let vueInstance = this;
-            // firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
-            //     vueInstance.$emit("open-generic-dialog", [vueInstance.$getLanguageMsg("Error"), error.message]);
-            // });
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+                alert(error);
+            });
         }
     }
 }
