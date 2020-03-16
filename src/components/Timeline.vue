@@ -12,9 +12,9 @@
 
         <v-timeline>
           <v-timeline-item v-for="(item, index) in timelineItems" :key="index">
-            <span slot="opposite" class="headline">{{item.date}}</span>
+            <span slot="opposite" class="headline font-weight-light">{{item.date}}</span>
             <v-card class="elevation-4">
-              <v-card-title class="display-1">{{item.title}}</v-card-title>
+              <v-card-title class="display-1 font-weight-light">{{item.title}}</v-card-title>
               <v-img :src="item.image"></v-img>
               <v-card-text v-if="item.description.length > 0" class="text-align">
                 {{item.description}}
