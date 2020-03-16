@@ -3,7 +3,7 @@
     <v-row class="text-center">
 
       <v-col>
-        <h1 class="display-2 mb-3 font-weight-light">
+        <h1 class="display-2 mb-12 font-weight-light">
           Welcome to Ninoska's Artkive
         </h1>
       </v-col>
