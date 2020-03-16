@@ -11,7 +11,7 @@
       <v-col cols="12">
 
         <v-timeline>
-          <v-timeline-item v-for="(item, index) in timelineItems" :key="index">
+          <v-timeline-item v-for="(item, index) in timelineItems" :key="index" color="indigo lighten-4">
             <span slot="opposite" class="headline font-weight-light">{{item.date}}</span>
             <v-card class="elevation-4">
 
