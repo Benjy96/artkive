@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Timeline/>
+    <Timeline :artist="artist"/>
   </div>
 </template>
 
@@ -12,6 +12,11 @@ export default {
   name: 'Home',
   components: {
     Timeline
+  },
+  data() {
+    return {
+      artist: 'zOjtgHJOHCXgRk6mgYhG1ZvTdxy2'
+    }
   }
 }
 </script>

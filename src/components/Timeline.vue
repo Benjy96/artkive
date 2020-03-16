@@ -3,7 +3,7 @@
     <v-row class="text-center">
 
       <v-col class="my-8">
-        <h1 class="display-2 font-weight-bold mb-3">
+        <h1 class="display-2 mb-3">
           Welcome to Artkive
         </h1>
       </v-col>
@@ -32,17 +32,9 @@
 <script>
   export default {
     name: 'Timeline',
-
+    props: ["artist"],
     data: () => ({
-      timelineItems: [
-        {
-          src: 'ojosbrillantes.jpg', 
-          title: 'Ojos Brillantes', 
-          text: 'Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.', 
-          date: '20 Jan 2020'
-
-        }
-      ]
+      timelineItems: []
     }),
     methods: {
       getAssetImg(src) {
