@@ -27,7 +27,9 @@ class FirebaseService {
 
     static async getArtworks(uid) {
         let artworks = [];
-        let querySnapshot = await db.collection('artists').doc(uid).collection('artworks').get();
+        let querySnapshot = await db.collection('artists').doc(uid).collection('artworks')
+            .orderBy("date", "asc").get();
+
         querySnapshot.forEach(doc => {
             artworks.push({
                 ...doc.data(),
