@@ -78,7 +78,10 @@ export default {
   methods: {
     add() {
       if(this.$refs.artworkForm.validate()) {
+        this.$emit("loading-started");
+
         FirebaseService.saveArtwork(this.title, this.description, this.date, this.image).then(() => {
+          this.$emit("loading-finished");
           this.$router.push({name: 'Home'})
         });
       }

@@ -41,11 +41,17 @@
     <v-content>
       <v-container>
         <v-fade-transition>
-          <router-view class="mx-auto my-8"/>
+          <router-view 
+          v-on:loading-started="loading = true" v-on:loading-finished="loading = false" 
+          class="mx-auto my-8"
+          />
         </v-fade-transition>
       </v-container>
     </v-content>
-    
+
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
     
   </v-app>
 </template>
@@ -54,6 +60,11 @@
 import firebase from 'firebase'
 
 export default {
+  data() {
+    return {
+      loading: false
+    }
+  },
   created() {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
