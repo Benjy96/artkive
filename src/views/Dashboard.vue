@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" sm="8">
+      <v-col>
         <v-card class="elevation-4">
           <v-form ref="artworkForm">
             <v-container>
@@ -50,6 +50,14 @@
           </v-form>
         </v-card>
       </v-col>
+
+      <v-col cols="12" md="4" v-if="previewImage">
+        <v-card>
+          <v-card-title v-if="title != ''">{{title}}</v-card-title>
+          <v-img :src="previewImage"></v-img>
+          <v-card-text v-if="description != ''">{{description}}</v-card-text>
+        </v-card>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -63,7 +71,8 @@ export default {
       image: null,
       description: '',
       title: '',
-      date: ''
+      date: '',
+      previewImage: null
     }
   },
   methods: {
@@ -94,6 +103,20 @@ export default {
       rules.push(imageNotNullRule, limitFileSizeRule);
 
       return rules;
+    }
+  },
+  watch: {
+    image: function(file) {
+      let vueInstance = this;
+      
+      let reader = new FileReader();
+      reader.onload = function(event) {
+        // window.console.log(this);
+        // capturing vueInstance above as in this method, this refers to the FileReader
+        // In an object method, this refers to the "owner" of the method.
+        vueInstance.previewImage = event.target.result;
+      }
+      reader.readAsDataURL(file)
     }
   }
 }
