@@ -24,13 +24,19 @@
               </v-card-title>
 
               <v-card-title class="display-1 font-weight-light" v-else>
-                <v-btn v-if="$root.user && editMode" @click="editMode = false" icon class="mr-2" color="error">
+                <v-btn v-if="$root.user && editMode" @click="editMode = false" icon class="mr-2">
                   <v-icon>mdi-close</v-icon>
                 </v-btn>
                 <v-btn v-if="$root.user && editMode" @click="updateArtwork(index)" icon class="mr-2" color="success">
                   <v-icon>mdi-check</v-icon>
                 </v-btn>
+
                 <v-text-field class="display-1 font-weight-light" v-model="item.title"></v-text-field>
+
+                <v-btn v-if="$root.user && editMode" @click="deleteArtwork(index)" icon class="ml-2" color="error">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+
               </v-card-title>
 
               <!-- Image -->
@@ -78,8 +84,18 @@ export default {
       this.editMode = false;
       let artwork = this.timelineItems[artworkIndex];
       FirebaseService.updateArtwork(artwork.id, artwork.title, artwork.description);
+    },
+    deleteArtwork(artworkIndex) {
+      if(confirm("Are you sure you wish to delete this?")) {
+        this.editMode = false;
+        let artworkID = this.timelineItems[artworkIndex].id;
+
+        this.timelineItems = this.timelineItems.filter(x => x.id != artworkID);
+
+        FirebaseService.deleteArtwork(artworkID);
+      }
     }
-  },
+  }
 }
 </script>
 

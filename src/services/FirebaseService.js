@@ -77,6 +77,12 @@ class FirebaseService {
             description: description
         });
     }
+
+    static async deleteArtwork(artworkID) {
+        let uid = this.getUserId();
+
+        db.collection(`artists/${uid}/artworks`).doc(artworkID).delete();
+    }
 }
 
 export default FirebaseService;
