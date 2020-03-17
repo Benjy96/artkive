@@ -60,7 +60,7 @@ export default {
         this.$root.user = null;
       } else {
         this.$root.user = user;
-        this.$router.push('/');
+        if(this.$route.name != 'Home') this.$router.push('/');
       }
       
     });
