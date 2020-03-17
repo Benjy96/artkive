@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="fade-in">
     <v-row class="text-center">
 
       <v-col>
@@ -45,6 +45,7 @@
               </v-card-text>
 
             </v-card>
+            
           </v-timeline-item>
         </v-timeline>
 
@@ -81,3 +82,20 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.fade-in * {
+  animation-name: fade;
+  animation-duration: 1.25s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+</style>
