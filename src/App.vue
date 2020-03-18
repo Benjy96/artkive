@@ -6,7 +6,7 @@
         text
         @click="logout"
       >
-        <v-icon>mdi-login</v-icon>
+        <v-icon>mdi-logout</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
@@ -21,12 +21,21 @@
       </v-btn>
 
       <v-btn
-        v-else
+        v-if="$root.user == null"
         class="mr-2"
         text
         to="/Login"
       >
-        <v-icon>mdi-account</v-icon>
+        <v-icon>mdi-login</v-icon>
+      </v-btn>
+
+      <v-btn
+        v-if="$root.user == null"
+        class="mr-2"
+        text
+        to="/Register"
+      >
+        <v-icon>mdi-account-edit</v-icon>
       </v-btn>
 
       <v-btn
