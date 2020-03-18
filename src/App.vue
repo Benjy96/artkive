@@ -42,7 +42,7 @@
       <v-container>
         <v-fade-transition>
           <router-view 
-          v-on:open-generic-dialog="genericDialog = true"
+          v-on:open-generic-dialog="openGenericDialog($event)"
           v-on:loading-started="loading = true" v-on:loading-finished="loading = false" 
           class="mx-auto my-8"
           />
@@ -78,7 +78,9 @@ export default {
   data() {
     return {
       loading: false,
-      genericDialog: false
+      genericDialog: false,
+      genericDialogTitle: 'Information',
+      genericDialogText: ''
     }
   },
   created() {
