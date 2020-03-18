@@ -109,7 +109,9 @@ export default {
         this.$root.user = null;
       } else {
         this.$root.user = user;
-        if(this.$route.name != 'Home') this.$router.push('/');
+        if(this.$route.name != 'Home') {
+          this.$router.push('/' + user.uid);
+        }
       }
       
     });
