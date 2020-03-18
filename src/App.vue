@@ -42,6 +42,7 @@
       <v-container>
         <v-fade-transition>
           <router-view 
+          v-on:open-generic-dialog="genericDialog = true"
           v-on:loading-started="loading = true" v-on:loading-finished="loading = false" 
           class="mx-auto my-8"
           />
@@ -52,6 +53,20 @@
     <v-overlay :value="loading">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
+
+    <!-- vm.$emit( eventName, […args] ) -->
+    <!-- https://vuejs.org/v2/api/#vm-emit -->
+    <v-dialog v-model="genericDialog" persistent max-width="400">
+      <v-card>
+        <v-card-title class="headline">{{genericDialogTitle}}</v-card-title>
+        <v-card-text>{{genericDialogText}}</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn v-if="genericDialogTitle == 'Information'" color="primary" @click="genericDialog = false">Ok</v-btn>
+          <v-btn v-else color="error darken-1" @click="genericDialog = false">Ok</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     
   </v-app>
 </template>
@@ -62,7 +77,8 @@ import firebase from 'firebase'
 export default {
   data() {
     return {
-      loading: false
+      loading: false,
+      genericDialog: false
     }
   },
   created() {
@@ -79,6 +95,11 @@ export default {
   methods: {
     logout() {
       firebase.auth().signOut();
+    },
+    openGenericDialog(event) {
+      this.genericDialogTitle = event[0];
+      this.genericDialogText = event[1];
+      this.genericDialog = true;
     }
   }
 }
