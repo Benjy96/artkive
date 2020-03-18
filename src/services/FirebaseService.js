@@ -27,6 +27,11 @@ class FirebaseService {
 
     /* ----- PROFILE ------ */
 
+    static async getArtistName(artistID) {
+        let docRef = await db.collection('artists').doc(artistID).get();
+        return docRef.data().firstname;
+    }
+
     //1. https://firebase.google.com/docs/reference/js/firebase.auth.Auth.html#createuserwithemailandpassword
     //2. https://firebase.google.com/docs/reference/js/firebase.auth.html#usercredential
     static async register(email, password, firstname, surname) {

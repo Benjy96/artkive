@@ -38,7 +38,18 @@
         <v-icon>mdi-account-edit</v-icon>
       </v-btn>
 
+      <!-- route to own timeline if logged in -->
       <v-btn
+        v-if="$root.user"
+        class="mr-2"
+        text
+        :to="'/' + $root.user.uid"
+      >
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn
+        v-else
         class="mr-2"
         text
         to="/"

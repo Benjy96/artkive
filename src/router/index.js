@@ -12,7 +12,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/Login',
@@ -28,6 +28,12 @@ const routes = [
     path: '/Dashboard',
     name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/:artist',
+    name: 'Home',
+    component: Home,
+    props: true
   }
 ]
 
@@ -35,6 +41,6 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
 export default router

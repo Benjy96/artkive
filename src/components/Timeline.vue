@@ -1,10 +1,10 @@
 <template>
-  <v-container class="fade-in">
+  <v-container>
     <v-row class="text-center">
 
-      <v-col>
-        <h1 class="display-2 mb-12 font-weight-light">
-          Welcome to Ninoska's Artkive
+      <v-col >
+        <h1 v-if="firstname" class="display-2 mb-12 font-weight-light">
+          {{firstname}}'s Artkive
         </h1>
       </v-col>
 
@@ -68,11 +68,16 @@ export default {
   name: 'Timeline',
   props: ["artist"],
   created() {
+    FirebaseService.getArtistName(this.artist).then(firstname => {
+      this.firstname = firstname;
+    });
+
     FirebaseService.getArtworks(this.artist).then((res) => {
       this.timelineItems = res;
     });
   },
   data: () => ({
+    firstname: null,
     editMode: false,
     timelineItems: []
   }),
@@ -98,20 +103,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.fade-in * {
-  animation-name: fade;
-  animation-duration: 1.25s;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-</style>
