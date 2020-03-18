@@ -27,7 +27,10 @@ const routes = [
   {
     path: '/Dashboard',
     name: 'Dashboard',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/:artist',

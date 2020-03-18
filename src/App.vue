@@ -107,11 +107,10 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.$root.user = null;
+        if(this.$route.meta.requiresAuth) this.$router.push('/');
       } else {
         this.$root.user = user;
-        if(this.$route.name != 'Artist') {
-          this.$router.push('/' + user.uid);
-        }
+        if(this.$route.name != 'Artist') this.$router.push('/' + user.uid);
       }
       
     });
