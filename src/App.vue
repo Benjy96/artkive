@@ -60,7 +60,7 @@
 
     <v-content>
       <v-container>
-        <v-fade-transition>
+        <v-fade-transition mode="out-in">
           <router-view 
           v-on:open-generic-dialog="openGenericDialog($event)"
           v-on:loading-started="loading = true" v-on:loading-finished="loading = false" 
