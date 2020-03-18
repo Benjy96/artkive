@@ -101,7 +101,7 @@ export default {
       const rules = [];
 
       let imageNotNullRule = value => value != null || 'You must provide an image';
-      let limitFileSizeRule = value => (value != null && value.size < 1000000) || 'File size is too large';
+      let limitFileSizeRule = value => (value != null && value.size < 1000000) || 'Images should be smaller than 1MB. Please compress your image.';
 
       rules.push(imageNotNullRule, limitFileSizeRule);
 
