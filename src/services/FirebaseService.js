@@ -25,6 +25,24 @@ class FirebaseService {
         return downloadURL;
     }
 
+    /* ----- PROFILE ------ */
+
+    //1. https://firebase.google.com/docs/reference/js/firebase.auth.Auth.html#createuserwithemailandpassword
+    //2. https://firebase.google.com/docs/reference/js/firebase.auth.html#usercredential
+    static async register(email, password, firstname, surname) {
+        await firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+            db.collection('artists').doc(userCredential.user.uid).set({
+                firstname: firstname,
+                surname: surname
+            });
+        })
+        .catch(e => {
+            return Promise.reject(e);
+        });
+    }
+
+    /* ----- ARTWORK ------ */
+
     static async getArtworks(uid) {
         let artworks = [];
         let querySnapshot = await db.collection('artists').doc(uid).collection('artworks')
