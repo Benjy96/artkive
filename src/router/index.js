@@ -31,7 +31,7 @@ const routes = [
   },
   {
     path: '/:artist',
-    name: 'Home',
+    name: 'Artist',
     component: Home,
     props: true
   }

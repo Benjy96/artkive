@@ -109,7 +109,7 @@ export default {
         this.$root.user = null;
       } else {
         this.$root.user = user;
-        if(this.$route.name != 'Home') {
+        if(this.$route.name != 'Artist') {
           this.$router.push('/' + user.uid);
         }
       }
