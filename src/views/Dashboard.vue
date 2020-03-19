@@ -14,9 +14,28 @@
                 </v-col>
 
                 <v-col>
-                  <v-text-field label="Date" v-model="date" prepend-icon="mdi-calendar"
-                  required :rules="requiredRule"
-                  />
+                  <v-dialog
+                  v-model="datePopup"
+                  persistent
+                  max-width="290px"
+                  min-width="290px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-text-field
+                        readonly
+                        v-model="date"
+                        label="Date"
+                        persistent-hint
+                        prepend-icon="mdi-calendar"
+                        v-on="on"
+                        required :rules="requiredRule"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker v-model="date">
+                      <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="datePopup = false">OK</v-btn>
+                    </v-date-picker>
+                  </v-dialog>
                 </v-col>
 
                 <v-col>
@@ -71,7 +90,8 @@ export default {
       image: null,
       description: '',
       title: '',
-      date: '',
+      date: new Date().toISOString().substr(0, 10),
+      datePopup: false,
       previewImage: null
     }
   },
