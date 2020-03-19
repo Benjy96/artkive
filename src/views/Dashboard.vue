@@ -36,7 +36,7 @@
                 </v-col>
                 <v-col cols="12" align="right">
                   <v-btn
-                    @click="add"
+                    @click="saveArtwork"
                     class="mx-auto font-weight-light"
                     color="success"
                   >
@@ -79,13 +79,13 @@ export default {
     }
   },
   methods: {
-    add() {
+    saveArtwork() {
       if(this.$refs.artworkForm.validate()) {
         this.$emit("loading-started");
 
         FirebaseService.saveArtwork(this.title, this.description, this.date, this.image).then(() => {
           this.$emit("loading-finished");
-          this.$router.push({name: 'Home'})
+          this.$router.push({name: 'Artist', params: { artist: this.$root.user.uid }})
         });
       }
     }
