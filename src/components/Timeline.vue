@@ -12,7 +12,13 @@
 
         <v-timeline>
           <v-timeline-item v-for="(item, index) in timelineItems" :key="index" color="indigo lighten-4">
-            <span slot="opposite" class="headline font-weight-light">{{item.date}}</span>
+
+            <!-- Date -->
+            <span v-if="!editMode" slot="opposite" class="headline font-weight-light">{{item.date}}</span>
+            <span v-else slot="opposite" class="headline font-weight-light">
+              <DatePicker :initialDate="item.date" v-on:date-saved="item.date = $event"></DatePicker>
+            </span>
+
             <v-card class="elevation-4">
 
               <!-- Title & Edit Button -->
@@ -64,9 +70,14 @@
 <script>
 import FirebaseService from '@/services/FirebaseService'
 
+import DatePicker from '@/components/DatePicker'
+
 export default {
   name: 'Timeline',
   props: ["artist"],
+  components: {
+    DatePicker
+  },
   created() {
     FirebaseService.getArtistName(this.artist).then(firstname => {
       this.firstname = firstname;
@@ -88,7 +99,7 @@ export default {
     updateArtwork(artworkIndex) {
       this.editMode = false;
       let artwork = this.timelineItems[artworkIndex];
-      FirebaseService.updateArtwork(artwork.id, artwork.title, artwork.description);
+      FirebaseService.updateArtwork(artwork.id, artwork.title, artwork.description, artwork.date);
     },
     deleteArtwork(artworkIndex) {
       if(confirm("Are you sure you wish to delete this?")) {

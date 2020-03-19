@@ -92,12 +92,13 @@ class FirebaseService {
         }
     }
 
-    static async updateArtwork(artworkID, title, description) {
+    static async updateArtwork(artworkID, title, description, date) {
         let uid = this.getUserId();
 
         db.collection(`artists/${uid}/artworks`).doc(artworkID).update({
             title: title,
-            description: description
+            description: description,
+            date: date
         });
     }
 
