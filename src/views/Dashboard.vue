@@ -33,6 +33,7 @@
                     </template>
                     <v-date-picker v-model="date">
                       <v-spacer></v-spacer>
+                      <v-btn text color="primary" @click="() => { datePopup = false; date=tempDate; }">Cancel</v-btn>
                       <v-btn text color="primary" @click="datePopup = false">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
@@ -91,6 +92,7 @@ export default {
       description: '',
       title: '',
       date: new Date().toISOString().substr(0, 10),
+      tempDate: '',
       datePopup: false,
       previewImage: null
     }
@@ -140,6 +142,11 @@ export default {
         vueInstance.previewImage = event.target.result;
       }
       reader.readAsDataURL(file)
+    },
+    datePopup: function(datePopup) {
+      if(datePopup) {
+        this.tempDate = this.date;
+      }
     }
   }
 }
