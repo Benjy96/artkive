@@ -33,7 +33,7 @@
                     </template>
                     <v-date-picker v-model="date">
                       <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="() => { datePopup = false; date=tempDate; }">Cancel</v-btn>
+                      <v-btn text color="primary" @click="() => { datePopup = false; date = tempDate; }">Cancel</v-btn>
                       <v-btn text color="primary" @click="datePopup = false">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
@@ -143,6 +143,7 @@ export default {
       }
       reader.readAsDataURL(file)
     },
+    // store the last saved date upon opening the dialog for if the user makes a change and wants to cancel it
     datePopup: function(datePopup) {
       if(datePopup) {
         this.tempDate = this.date;
