@@ -14,29 +14,7 @@
                 </v-col>
 
                 <v-col>
-                  <v-dialog
-                  v-model="datePopup"
-                  persistent
-                  max-width="290px"
-                  min-width="290px"
-                  >
-                    <template v-slot:activator="{ on }">
-                      <v-text-field
-                        readonly
-                        v-model="date"
-                        label="Date"
-                        persistent-hint
-                        prepend-icon="mdi-calendar"
-                        v-on="on"
-                        required :rules="requiredRule"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="date">
-                      <v-spacer></v-spacer>
-                      <v-btn text color="primary" @click="() => { datePopup = false; date = tempDate; }">Cancel</v-btn>
-                      <v-btn text color="primary" @click="datePopup = false">OK</v-btn>
-                    </v-date-picker>
-                  </v-dialog>
+                  <DatePicker :initialDate="date" v-on:date-saved="date = $event"/>
                 </v-col>
 
                 <v-col>
@@ -85,15 +63,18 @@
 <script>
 import FirebaseService from '@/services/FirebaseService'
 
+import DatePicker from '@/components/DatePicker'
+
 export default {
+  components: {
+    DatePicker
+  },
   data() {
     return {
       image: null,
       description: '',
       title: '',
       date: new Date().toISOString().substr(0, 10),
-      tempDate: '',
-      datePopup: false,
       previewImage: null
     }
   },
@@ -142,12 +123,6 @@ export default {
         vueInstance.previewImage = event.target.result;
       }
       reader.readAsDataURL(file)
-    },
-    // store the last saved date upon opening the dialog for if the user makes a change and wants to cancel it
-    datePopup: function(datePopup) {
-      if(datePopup) {
-        this.tempDate = this.date;
-      }
     }
   }
 }
