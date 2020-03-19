@@ -12,7 +12,7 @@
       <v-row>
         <v-col>
           <h2 class="display-1 font-weight-thin">
-            Your very own art gallery
+            Your very own portfolio
           </h2>
         </v-col>
       </v-row>
